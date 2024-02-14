@@ -1,6 +1,6 @@
 @include('header')
 
-<body >
+<body>
     @include('navigation-menu')
     <!-- Header-->
     <header class="bg-dark py-5">
@@ -14,9 +14,7 @@
     <!-- Section-->
     <section class="py-5" style="min-height: 49.7vh;">
         <div class="container px-4 px-lg-5 mt-5">
-                <livewire:listarProdutos />
-              
-            
+            <livewire:listarProdutos />
         </div>
     </section>
     @include('footer')

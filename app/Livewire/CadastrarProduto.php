@@ -13,14 +13,14 @@ class CadastrarProduto extends Component
 {
     use WithFileUploads;
 
-    public $nome, $promocao, $preco, $desconto, $quantidade, $imagem;
+    public $nome, $preco, $desconto, $quantidade, $imagem;
 
-
+    public $promocao = 0;
 
 
     protected $rules = [
         'nome' => 'required|min:3',
-        'promocao' => 'required',
+        'promocao' => 'required|max:1',
         'preco' => 'required|numeric',
         'desconto' => 'nullable|numeric',
         'quantidade' => 'required|integer',
@@ -40,11 +40,6 @@ class CadastrarProduto extends Component
         $path = $this->imagem->storeAs("public/" . $nameFile);
 
         if ($path) {
-            if ($this->promocao == "false") {
-                $this->promocao = false;
-            } else {
-                $this->promocao = true;
-            }
             Produto::create(
                 [
                     'nome' => $this->nome,

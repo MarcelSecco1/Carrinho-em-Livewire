@@ -31,4 +31,4 @@ Route::get('/', function () {
 
 Route::get('/cadastrar', CadastrarProduto::class)
     ->middleware('auth')
-    ->name('upload');
+    ->name('create.product');

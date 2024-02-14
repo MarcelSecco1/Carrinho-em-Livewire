@@ -1,5 +1,5 @@
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg bg-dark text-white">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="#!">E-Commerce do Marcel</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -28,23 +28,27 @@
                     @else
                         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
                         @if (Route::has('register'))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registrar</a></li>
+                            <li class="nav-item text-white "><a class="nav-link"
+                                    href="{{ route('register') }}">Registrar</a></li>
                         @endif
                     @endauth
 
                 @endif
             </ul>
             <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
+                <button class="btn btn-outline-primary" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Carrinho
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>
-            <button class="btn btn-outline-danger ms-4" type="submit">
-                <i class="bi bi-x-circle"></i>
-                Sair
-            </button>
+            @auth
+                <button class="btn btn-outline-danger ms-4" type="submit">
+                    <i class="bi bi-x-circle"></i>
+                    Sair
+                </button>
+            @endauth
+
         </div>
     </div>
 </nav>

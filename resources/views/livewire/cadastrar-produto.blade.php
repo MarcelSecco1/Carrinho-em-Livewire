@@ -7,14 +7,13 @@
             <div class="alert alert-success ps-3 pe-3 text-center">
                 {{ session('message') }}
             </div>
-            
         @else
             @if (session()->has('error'))
                 <div class="alert alert-danger ps-3 pe-3 text-center">
                     {{ session('error') }}
                 </div>
             @endif
-          
+
         @endif
         <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
@@ -24,15 +23,16 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="qtd" class="form-label">Quantidade:</label>
+            <label for="qtd" class="form-label">Quantidade disponível:</label>
             <input type="number" class="form-control" id="quantidade" wire:model="quantidade">
             @error('quantidade')
                 <span class="error text-bg-danger">{{ $message }}</span>
             @enderror
         </div>
-        <div class="mb-3">
+        <div class="mb-3" x-data="{}">
             <label for="qtd" class="form-label">Preço:</label>
-            <input type="number" class="form-control" id="preco" wire:model="preco">
+            <input x-mask:dynamic="$money($input)" type="text" class="form-control" id="preco"
+                wire:model="preco">
             @error('qtprecod')
                 <span class="error text-bg-danger">{{ $message }}</span>
             @enderror
@@ -40,7 +40,7 @@
         <div class="mb-3">
             <label for="promo" class="form-label">Promoção?</label>
             <div class="form-check">
-                <input class="form-check-input" type="radio" wire:model="promocao" id="promoYes" value="true">
+                <input class="form-check-input" type="radio" wire:model.live="promocao" id="promoYes" value="1">
                 <label class="form-check-label" for="flexRadioDefault1" class="me-5">
                     Sim
                 </label>
@@ -49,30 +49,41 @@
                 @enderror
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" wire:model="promocao" id="promoNo" checked
-                    value="false">
+                <input class="form-check-input checked" type="radio" wire:model.live="promocao" id="promoNo"
+                    value="0">
                 <label class="form-check-label" for="flexRadioDefault2" class="ms-5">
                     Não
                 </label>
             </div>
             <div class="mb-3 mt-3">
-                <label for="desconto" class="form-label">Quantos %?</label>
-                <input type="number" class="form-control" id="desconto" name="desconto" disabled
-                    wire:model="desconto">
+                @if ($promocao)
+                    <label for="desconto" class="form-label">Quantos %?</label>
+                    <input type="number" class="form-control" id="desconto" name="desconto" wire:model="desconto">
+                @else
+                    <label for="desconto" class="form-label">Quantos %?</label>
+                    <input type="number" class="form-control" id="desconto" name="desconto" disabled>
+                @endif
+
                 @error('desconto')
                     <span class="error text-bg-danger">{{ $message }}</span>
                 @enderror
 
             </div>
+            @if ($imagem)
+                <img src="{{ $imagem->temporaryUrl() }}" class="rounded mx-auto d-block" width='250' heigth='250'>
+            @endif
             <div class="mb-3">
                 <label for="file" class="form-label">Imagem:</label>
-                <input type="file" class="form-control" id="file" name="imagem" wire:model="imagem">
+                <input type="file" class="form-control mb-3" id="file" name="imagem" wire:model="imagem">
                 @error('imagem')
-                    <span class="error text-bg-danger">{{ $message }}</span>
+                    <span class="mt-2 text-danger">{{ $message }}</span>
                 @enderror
+
             </div>
         </div>
-
-        <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+        <div class="d-flex justify-content-between ">
+            <button type="submit" class="btn btn-primary w-50 me-2">Cadastrar</button>
+            <button type="reset" class="btn btn-danger w-50 ms-2">Limpar</button>
+        </div>
     </form>
 </div>
