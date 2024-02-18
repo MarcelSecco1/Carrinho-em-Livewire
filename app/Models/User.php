@@ -59,4 +59,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    //um user tem um cart
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
 }

@@ -22,6 +22,8 @@ class Produto extends Model
     {
         return number_format($value, 2, ',', '.');
     }
-
-    
+    public function carrinhos()
+    {
+        return $this->belongsTo(Cart::class);
+    }
 }

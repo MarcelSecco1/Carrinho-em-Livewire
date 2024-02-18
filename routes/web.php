@@ -1,6 +1,8 @@
 <?php
 
 use App\Livewire\CadastrarProduto;
+use App\Livewire\CartFinal;
+use App\Livewire\Home;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', Home::class)
+    ->name('home');
 
 // Route::middleware([
 //     'auth:sanctum',
@@ -28,6 +29,9 @@ Route::get('/', function () {
 //     })->name('home');
 // });
 
+Route::get('/finalizar-cart', CartFinal::class)
+    ->middleware('auth')
+    ->name('cart.final');
 
 Route::get('/cadastrar', CadastrarProduto::class)
     ->middleware('auth')

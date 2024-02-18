@@ -39,6 +39,9 @@ class CadastrarProduto extends Component
         $nameFile = Str::Slug($this->nome) . '.' . $this->imagem->getClientOriginalExtension();
         $path = $this->imagem->storeAs("public/" . $nameFile);
 
+        if ($this->promocao) {
+            $this->preco = $this->preco - ($this->preco * ($this->desconto / 100));
+        }
         if ($path) {
             Produto::create(
                 [
@@ -57,6 +60,7 @@ class CadastrarProduto extends Component
             $this->desconto = '';
             $this->quantidade = '';
             $this->imagem = '';
+            $nameFile = '';
             session()->flash('message', 'Produto cadastrado com sucesso!');
         } else {
             session()->flash('error', 'Houve um erro ao cadastrar o Produto!');
