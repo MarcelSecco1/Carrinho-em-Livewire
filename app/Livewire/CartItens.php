@@ -47,11 +47,11 @@ class CartItens extends Component
                     if (isset($quantidades[$produto->id])) {
                         if ($produto->quantidade >= $quantidades[$produto->id]) {
                             session()->flash('produto' . $produto->id, $quantidades[$produto->id]);
-                        } 
+                        }
                     }
                 }
             }
-            $this->quantiaItens = Cart::count();
+            $this->quantiaItens = Cart::where('user_id', auth()->user()->id)->count();
         }
     }
 
