@@ -18,7 +18,7 @@ O projeto está rodando atráves de containers, por isso, basta você executar o
 - Docker
 - Npm ou similares
 
-
+Primeiro clome o repositório:
 ```bash
   git clone https://github.com/MarcelSecco1/Carrinho-em-Livewire.git
 ```
